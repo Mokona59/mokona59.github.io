@@ -2,7 +2,7 @@
   const el = document.getElementById('github-widget');
   if(!el) return;
   try {
-    const res = await fetch('https://api.github.com/users/Mokona5901');
+    const res = await fetch('https://api.github.com/users/Mokona59');
     if(!res.ok) throw new Error('GitHub API error');
     const u = await res.json();
     const avatar = u.avatar_url ? `${u.avatar_url}&s=96` : '';
