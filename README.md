@@ -1,1 +1,1 @@
-# mokona59.github.io
+Right click index.html -> Open in embedded browser

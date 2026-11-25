@@ -3,81 +3,265 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <base href="../" />
     <title>Portfolio de Mokona59</title>
-    <link rel="icon" type="image/x-icon" href="/assets/img/favicon.png">
-    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="icon" type="image/x-icon" href="public/assets/favicon.png" />
+    <link rel="stylesheet" href="public/css/style.css" />
+    <style>
+      #character-widget {
+        position: fixed;
+        top: 0;
+        right: 0;
+        left: 0;
+        bottom: 0;
+        z-index: 2;
+        pointer-events: none;
+        visibility: hidden;
+      }
+
+      #character-widget.is-fading-out canvas {
+        opacity: 0;
+        transition: opacity 1s ease;
+      }
+    </style>
   </head>
   <body>
-    <div class="lang-switcher">
-      <button class="lang-btn lang-btn--theme" id="theme-toggle"><img id="toggle-icon" src="/assets/img/light.png" alt="Light theme" height="20" width="20" onclick="toggleImage()"></button>
-      <a class="lang-btn lang-btn--en" href="/"><img src="/assets/img/en.png" alt="EN" height="20" width="25"></a>
-    </div>
+    <nav class="navbar" aria-label="Navigation principale">
+      <button
+        class="menu-toggle"
+        id="menu-toggle"
+        type="button"
+        aria-label="Ouvrir le menu"
+        aria-controls="primary-navigation"
+        aria-expanded="false"
+      >
+        <span class="menu-toggle__icon" aria-hidden="true"></span>
+      </button>
+      <ul class="navbar-links" id="primary-navigation">
+        <li><a href="fr/index.html#home" aria-current="page">Accueil</a></li>
+        <li><a href="fr/index.html#about">À propos</a></li>
+        <li><a href="fr/index.html#projects">Projets</a></li>
+        <li><a href="fr/index.html#contact">Contact</a></li>
+      </ul>
+      <div class="lang-switcher">
+        <a
+          class="lang-btn lang-btn--en"
+          href="index.html"
+          aria-label="English"
+        >
+          <img src="public/assets/en.png" alt="EN" height="20" width="25" />
+        </a>
+        <button class="lang-btn lang-btn--theme" id="theme-toggle" type="button">
+          <img
+            id="toggle-icon"
+            src="public/assets/light.png"
+            alt="Passer au thème clair"
+            height="20"
+            width="20"
+            onclick="toggleImage()"
+          />
+        </button>
+        <button
+          class="lang-btn lang-btn--character"
+          id="load-character-button"
+          type="button"
+          aria-controls="character-widget"
+          aria-expanded="false"
+          aria-label="Afficher le personnage"
+          aria-pressed="false"
+        >
+          <img src="public/assets/teto.png" alt="" height="20" width="20" />
+        </button>
+      </div>
+    </nav>
 
     <script>
-    const img = document.getElementById("toggle-icon");
-    const html = document.documentElement;
-    const savedTheme = localStorage.getItem("theme");
+      const navbar = document.querySelector(".navbar");
+      const menuToggle = document.getElementById("menu-toggle");
+      const primaryNavigation = document.getElementById("primary-navigation");
 
-    if (savedTheme) {
-      html.setAttribute("data-theme", savedTheme);
-      img.src = savedTheme === "light" ? "/assets/img/dark.png" : "/assets/img/light.png";
-    } else {
-      html.setAttribute("data-theme", "dark");
-      img.src = "/assets/img/light.png";
-    }
+      function closeMenu() {
+        navbar.classList.remove("is-open");
+        menuToggle.setAttribute("aria-expanded", "false");
+        menuToggle.setAttribute("aria-label", "Ouvrir le menu");
+      }
 
-    function toggleImage() {
-      const currentTheme = html.getAttribute("data-theme");
-      const newTheme = currentTheme === "light" ? "dark" : "light";
-      html.setAttribute("data-theme", newTheme);
-      localStorage.setItem("theme", newTheme);
-      img.src = newTheme === "light" ? "/assets/img/dark.png" : "/assets/img/light.png";
-    }
+      menuToggle.addEventListener("click", function () {
+        const isOpen = navbar.classList.toggle("is-open");
+        menuToggle.setAttribute("aria-expanded", String(isOpen));
+        menuToggle.setAttribute(
+          "aria-label",
+          isOpen ? "Fermer le menu" : "Ouvrir le menu",
+        );
+      });
+
+      primaryNavigation.addEventListener("click", function (event) {
+        if (event.target.closest("a")) closeMenu();
+      });
+
+      document.addEventListener("click", function (event) {
+        if (!navbar.contains(event.target)) closeMenu();
+      });
+
+      document.addEventListener("keydown", function (event) {
+        if (event.key === "Escape" && navbar.classList.contains("is-open")) {
+          closeMenu();
+          menuToggle.focus();
+        }
+      });
+
+      window.addEventListener("resize", function () {
+        if (window.innerWidth > 720) closeMenu();
+      });
+
+      const img = document.getElementById("toggle-icon");
+      const html = document.documentElement;
+      const savedTheme = localStorage.getItem("theme");
+
+      function updateThemeIcon(theme) {
+        const isLight = theme === "light";
+        img.src = isLight
+          ? "public/assets/dark.png"
+          : "public/assets/light.png";
+        img.alt = isLight ? "Passer au thème sombre" : "Passer au thème clair";
+      }
+
+      if (savedTheme) {
+        html.setAttribute("data-theme", savedTheme);
+      } else {
+        html.setAttribute("data-theme", "dark");
+      }
+      updateThemeIcon(html.getAttribute("data-theme"));
+
+      function toggleImage() {
+        const currentTheme = html.getAttribute("data-theme");
+        const newTheme = currentTheme === "light" ? "dark" : "light";
+        html.setAttribute("data-theme", newTheme);
+        localStorage.setItem("theme", newTheme);
+        updateThemeIcon(newTheme);
+      }
     </script>
 
-    <main class="container">
+    <main class="container" id="home">
       <header>
-        <h1>Bienvenue sur le site portfolio de Mokona59</h1>
-        <p class="lead">Développeur back‑end — construction de services robustes et d'applications en temps réel.</p>
+        <h1>Bienvenue sur le portfolio de Mokona59</h1>
+        <p class="lead">
+          Développeur back-end — création de services fiables et d'applications
+          en temps réel.
+        </p>
       </header>
 
-      <section>
+      <section id="about">
         <h2>À propos</h2>
-        <p>Je suis un développeur back‑end, spécialisé dans la création de services maintenables ainsi que d’applications en temps réel. Mes compétences principales sont : Node.js, HTML/CSS/PHP/JS/SQL, C++ et Symfony.</p>
+        <p>
+          Je suis développeur back-end, spécialisé dans la création de services
+          évolutifs et faciles à maintenir, ainsi que d'applications en temps
+          réel. Mes compétences principales sont : Node.js, HTML/CSS/PHP/JS/SQL,
+          C++ et Symfony.
+        </p>
       </section>
 
-      <section>
+      <section id="projects">
         <h2>Projets personnels</h2>
-          <details><summary class="hover"><strong>Bots Discord</strong> — Plusieurs bots développés avec Node.js et Discord.js (automatisation, modération, utilitaires). Utilisations de plusieurs APIs pour les commandes.</summary>
-              <img src="/assets/img/bots.png" width="265" height="138" alt="Mokona59 used /ai, Hello! Do you have a pet ?"></details>
-          <details><summary class="hover"><strong>Application de chat en temps réel</strong> — Application de type Discord développé avec Node.js, Express, Socket.io et MongoDB.</summary>
-              <img src="/assets/img/chatapp.png" width="500" height="600" alt="chatapp image"></details>
-          <details><summary class="hover"><strong>Discord RPC pour WSL2</strong> — Intégration native en C++ du Discord Rich Presence pour l'environnement WSL2.</summary>
-              <img src="/assets/img/wsl2rpc-win.png" alt="RPC when user is on a windows app"><img src="/assets/img/wsl2rpc-wsl.png" alt="RPC when user is on a WSL2 app"></details>
+        <details>
+          <summary class="hover">
+            <strong>Bots Discord</strong> — Plusieurs bots développés avec
+            Node.js et Discord.js (automatisation, modération, utilitaires),
+            utilisant plusieurs API pour leurs commandes.
+          </summary>
+          <img
+            src="public/assets/bots.png"
+            width="265"
+            height="138"
+            alt="Mokona59 a utilisé /ai : Bonjour ! As-tu un animal de compagnie ?"
+          />
+        </details>
+        <details>
+          <summary class="hover">
+            <strong>Application de chat en temps réel</strong> — Application
+            similaire à Discord, développée avec Node.js, Express, Socket.io et
+            MongoDB.
+          </summary>
+          <img
+            src="public/assets/chatapp.png"
+            width="500"
+            height="600"
+            alt="Capture d'écran de l'application de chat"
+          />
+        </details>
+        <details>
+          <summary class="hover">
+            <strong>Discord RPC pour WSL2</strong> — Intégration native en C++
+            du Discord Rich Presence pour l'environnement WSL2.
+          </summary>
+          <img
+            src="public/assets/wsl2rpc-win.png"
+            alt="RPC lorsque l'utilisateur utilise une application Windows"
+          /><img
+            src="public/assets/wsl2rpc-wsl.png"
+            alt="RPC lorsque l'utilisateur utilise une application WSL2"
+          />
+        </details>
       </section>
 
       <section>
         <h2>GitHub</h2>
         <div id="github-widget">Chargement du profil GitHub…</div>
-        <script src="/assets/js/github-widget.js"></script>
+        <script src="public/js/github-widget.js"></script>
       </section>
 
-      <section>
+      <section id="contact">
         <h2>Contactez-moi</h2>
         <div class="contact-item">
-          <img src="/assets/img/mail.png" alt="Icone Email" height="20" width="25" class="contact-icon">
+          <img
+            src="public/assets/mail.png"
+            alt="Icône e-mail"
+            height="20"
+            width="25"
+            class="contact-icon"
+          />
           <a href="mailto:mokona5901@gmail.com">mokona5901@gmail.com</a>
         </div>
 
         <div class="contact-item">
-          <img src="/assets/img/discord.png" alt="Icone Discord" height="20" width="25" class="contact-icon">
+          <img
+            src="public/assets/discord.png"
+            alt="Icône Discord"
+            height="20"
+            width="25"
+            class="contact-icon"
+          />
           <a href="https://discord.com/users/602431280113778690">mokona59</a>
         </div>
-     </section>
+      </section>
 
       <footer>
-        <p>Déployé depuis le dépôt <a href="https://github.com/mokona59/mokona59.github.io"><code>mokona59.github.io</code> </a></p>
+        <p>
+          Déployé depuis le dépôt
+          <a href="https://github.com/mokona59/mokona59.github.io"
+            ><code>mokona59.github.io</code></a
+          >.
+        </p>
       </footer>
     </main>
+
+    <div id="character-widget" aria-hidden="true"></div>
+
+    <script src="https://rawcdn.githack.com/mrdoob/three.js/r87/build/three.js"></script>
+    <script src="https://rawcdn.githack.com/mrdoob/three.js/r87/examples/js/libs/mmdparser.min.js"></script>
+    <script src="https://rawcdn.githack.com/mrdoob/three.js/r87/examples/js/libs/ammo.js"></script>
+    <script src="https://rawcdn.githack.com/mrdoob/three.js/r87/examples/js/loaders/TGALoader.js"></script>
+    <script src="public/js/MMDLoader.js"></script>
+    <script src="https://rawcdn.githack.com/mrdoob/three.js/r87/examples/js/effects/OutlineEffect.js"></script>
+    <script src="https://rawcdn.githack.com/mrdoob/three.js/r87/examples/js/animation/CCDIKSolver.js"></script>
+    <script src="https://rawcdn.githack.com/mrdoob/three.js/r87/examples/js/animation/MMDPhysics.js"></script>
+    <script src="https://rawcdn.githack.com/mrdoob/three.js/r87/examples/js/controls/OrbitControls.js"></script>
+    <script src="https://rawcdn.githack.com/mrdoob/three.js/r87/examples/js/Detector.js"></script>
+
+    <script src="public/js/app-state.js"></script>
+    <script src="public/js/app-animation.js"></script>
+    <script src="public/js/app-controls.js"></script>
+    <script src="public/js/app-scene.js"></script>
+    <script src="public/js/app.js"></script>
   </body>
 </html>
