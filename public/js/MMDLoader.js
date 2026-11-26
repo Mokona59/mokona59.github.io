@@ -901,7 +901,23 @@ THREE.MMDLoader.prototype.createMesh = function ( model, texturePath, onProgress
 
 			} else {
 
-				fullPath = texturePath + filePath;
+				var normalizedTexturePath = texturePath.replace( /\\/g, '/' );
+				var normalizedFilePath = filePath.replace( /\\/g, '/' );
+				normalizedFilePath = normalizedFilePath.replace( /^\.?\//, '' );
+
+				// PMX files exported on Windows often contain absolute or
+				// backslash-separated texture paths. Keep model-relative paths
+				// and discard Windows prefixes or directory drives.
+				if ( /^[A-Za-z]:/.test( normalizedFilePath ) ) {
+					var textureDirectoryMatch = normalizedFilePath.match( /(\/?Tex\/|\/?Toon\/|\/?Spa\/)/i );
+					normalizedFilePath = textureDirectoryMatch === null
+						? normalizedFilePath.substring( normalizedFilePath.lastIndexOf( '/' ) + 1 )
+						: normalizedFilePath.substring( normalizedFilePath.search( textureDirectoryMatch[ 0 ].replace( /^\//, '' ) ) );
+				}
+
+				fullPath = normalizedFilePath.indexOf( '/' ) === 0
+					? normalizedFilePath
+					: normalizedTexturePath.replace( /\/+$/, '' ) + '/' + normalizedFilePath.replace( /^\/+/, '' );
 
 			}
 

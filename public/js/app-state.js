@@ -69,11 +69,12 @@ var dragPreviousPointerWorld = new THREE.Vector3();
 var dragLastPointerTime = 0;
 
 // see the license https://github.com/takahirox/MMDLoader-app#readme for these assets
+var publicAssetBase = new URL('/public/', window.location.origin).href;
 
 var modelParams = [
 	{
 		name: 'teto',
-		file: '/public/Teto/Kasane_Teto_SV_TEX.pmx',
+		file: publicAssetBase + 'Teto/Kasane_Teto_SV_TEX.pmx',
 		position: new THREE.Vector3(0, -15, 0),
 	},
 ];
@@ -94,7 +95,7 @@ var blinkMorphName = 'まばたき';
 var poseParams = [
 	{
 		name: 'basic',
-		file: '/public/animations/makoto_basic.vpd',
+		file: publicAssetBase + 'animations/makoto_basic.vpd',
 	},
 ];
 
@@ -104,32 +105,32 @@ var motionParams = [
 	{
 		name: 'walk',
 		isMoving: true,
-		files: ['/public/animations/walk.vmd'],
+		files: [publicAssetBase + 'animations/walk.vmd'],
 	},
 	{
 		name: 'wave',
 		isMoving: false,
-		files: ['/public/animations/wave.vmd'],
+		files: [publicAssetBase + 'animations/wave.vmd'],
 	},
 	{
 		name: 'sleeping-idle',
 		isMoving: false,
-		files: ['/public/animations/sleeping-idle.vmd'],
+		files: [publicAssetBase + 'animations/sleeping-idle.vmd'],
 	},
 	{
 		name: 'fall-idle',
 		isMoving: false,
-		files: ['/public/animations/fall-idle.vmd'],
+		files: [publicAssetBase + 'animations/fall-idle.vmd'],
 	},
 	{
 		name: 'land',
 		isMoving: false,
-		files: ['/public/animations/land.vmd'],
+		files: [publicAssetBase + 'animations/land.vmd'],
 	},
 	{
 		name: 'climbing',
 		isMoving: true,
-		files: ['/public/animations/climbing.vmd'],
+		files: [publicAssetBase + 'animations/climbing.vmd'],
 	},
 ];
 
