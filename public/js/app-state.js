@@ -73,7 +73,7 @@ var dragLastPointerTime = 0;
 var modelParams = [
 	{
 		name: 'teto',
-		file: 'Teto/Kasane_Teto_SV_TEX.pmx',
+		file: '/public/Teto/Kasane_Teto_SV_TEX.pmx',
 		position: new THREE.Vector3(0, -15, 0),
 	},
 ];
@@ -94,7 +94,7 @@ var blinkMorphName = 'まばたき';
 var poseParams = [
 	{
 		name: 'basic',
-		file: 'animations/makoto_basic.vpd',
+		file: '/public/animations/makoto_basic.vpd',
 	},
 ];
 
@@ -104,32 +104,32 @@ var motionParams = [
 	{
 		name: 'walk',
 		isMoving: true,
-		files: ['animations/walk.vmd'],
+		files: ['/public/animations/walk.vmd'],
 	},
 	{
 		name: 'wave',
 		isMoving: false,
-		files: ['animations/wave.vmd'],
+		files: ['/public/animations/wave.vmd'],
 	},
 	{
 		name: 'sleeping-idle',
 		isMoving: false,
-		files: ['animations/sleeping-idle.vmd'],
+		files: ['/public/animations/sleeping-idle.vmd'],
 	},
 	{
 		name: 'fall-idle',
 		isMoving: false,
-		files: ['animations/fall-idle.vmd'],
+		files: ['/public/animations/fall-idle.vmd'],
 	},
 	{
 		name: 'land',
 		isMoving: false,
-		files: ['animations/land.vmd'],
+		files: ['/public/animations/land.vmd'],
 	},
 	{
 		name: 'climbing',
 		isMoving: true,
-		files: ['animations/climbing.vmd'],
+		files: ['/public/animations/climbing.vmd'],
 	},
 ];
 
