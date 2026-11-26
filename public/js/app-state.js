@@ -73,7 +73,7 @@ var dragLastPointerTime = 0;
 var modelParams = [
 	{
 		name: 'teto',
-		file: 'Teto/Kasane Teto SV_TEX.pmx',
+		file: 'Teto/Kasane_Teto_SV_TEX.pmx',
 		position: new THREE.Vector3(0, -15, 0),
 	},
 ];
