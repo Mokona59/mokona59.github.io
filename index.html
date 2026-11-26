@@ -4,8 +4,8 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>Mokona59's Portfolio</title>
-    <link rel="icon" type="image/x-icon" href="public/assets/favicon.png" />
-    <link rel="stylesheet" href="public/css/style.css" />
+    <link rel="icon" type="image/x-icon" href="assets/favicon.png" />
+    <link rel="stylesheet" href="css/style.css" />
     <style>
       #character-widget {
         position: fixed;
@@ -44,12 +44,12 @@
       </ul>
       <div class="lang-switcher">
         <a class="lang-btn lang-btn--fr" href="fr/index.html" aria-label="Français">
-          <img src="public/assets/fr.png" alt="FR" height="20" width="25" />
+          <img src="assets/fr.png" alt="FR" height="20" width="25" />
         </a>
         <button class="lang-btn lang-btn--theme" id="theme-toggle" type="button">
           <img
             id="toggle-icon"
-            src="public/assets/light.png"
+            src="assets/light.png"
             alt="Light theme"
             height="20"
             width="20"
@@ -65,7 +65,7 @@
           aria-label="Show character"
           aria-pressed="false"
         >
-          <img src="public/assets/teto.png" alt="" height="20" width="20" />
+          <img src="assets/teto.png" alt="" height="20" width="20" />
         </button>
       </div>
     </nav>
@@ -117,11 +117,11 @@
         html.setAttribute("data-theme", savedTheme);
         img.src =
           savedTheme === "light"
-            ? "public/assets/dark.png"
-            : "public/assets/light.png";
+            ? "assets/dark.png"
+            : "assets/light.png";
       } else {
         html.setAttribute("data-theme", "dark");
-        img.src = "public/assets/light.png";
+        img.src = "assets/light.png";
       }
 
       function toggleImage() {
@@ -131,8 +131,8 @@
         localStorage.setItem("theme", newTheme);
         img.src =
           newTheme === "light"
-            ? "public/assets/dark.png"
-            : "public/assets/light.png";
+            ? "assets/dark.png"
+            : "assets/light.png";
       }
     </script>
 
@@ -163,7 +163,7 @@
             for the commands.
           </summary>
           <img
-            src="public/assets/bots.png"
+            src="assets/bots.png"
             width="265"
             height="138"
             alt="Mokona59 used /ai, Hello! Do you have a pet ?"
@@ -175,7 +175,7 @@
             Node.js, Express, Socket.io and MongoDB.
           </summary>
           <img
-            src="public/assets/chatapp.png"
+            src="assets/chatapp.png"
             width="500"
             height="600"
             alt="chatapp image"
@@ -187,10 +187,10 @@
             Discord Rich Presence for the WSL2 environment.
           </summary>
           <img
-            src="public/assets/wsl2rpc-win.png"
+            src="assets/wsl2rpc-win.png"
             alt="RPC when user is on a windows app"
           /><img
-            src="public/assets/wsl2rpc-wsl.png"
+            src="assets/wsl2rpc-wsl.png"
             alt="RPC when user is on a WSL2 app"
           />
         </details>
@@ -199,14 +199,14 @@
       <section>
         <h2>GitHub</h2>
         <div id="github-widget">Loading GitHub profile…</div>
-        <script src="public/js/github-widget.js"></script>
+        <script src="js/github-widget.js"></script>
       </section>
 
       <section id="contact">
         <h2>Contact me</h2>
         <div class="contact-item">
           <img
-            src="public/assets/mail.png"
+            src="assets/mail.png"
             alt="Email icon"
             height="20"
             width="25"
@@ -217,7 +217,7 @@
 
         <div class="contact-item">
           <img
-            src="public/assets/discord.png"
+            src="assets/discord.png"
             alt="Discord icon"
             height="20"
             width="25"
@@ -243,17 +243,17 @@
     <script src="https://rawcdn.githack.com/mrdoob/three.js/r87/examples/js/libs/mmdparser.min.js"></script>
     <script src="https://rawcdn.githack.com/mrdoob/three.js/r87/examples/js/libs/ammo.js"></script>
     <script src="https://rawcdn.githack.com/mrdoob/three.js/r87/examples/js/loaders/TGALoader.js"></script>
-    <script src="public/js/MMDLoader.js"></script>
+    <script src="js/MMDLoader.js"></script>
     <script src="https://rawcdn.githack.com/mrdoob/three.js/r87/examples/js/effects/OutlineEffect.js"></script>
     <script src="https://rawcdn.githack.com/mrdoob/three.js/r87/examples/js/animation/CCDIKSolver.js"></script>
     <script src="https://rawcdn.githack.com/mrdoob/three.js/r87/examples/js/animation/MMDPhysics.js"></script>
     <script src="https://rawcdn.githack.com/mrdoob/three.js/r87/examples/js/controls/OrbitControls.js"></script>
     <script src="https://rawcdn.githack.com/mrdoob/three.js/r87/examples/js/Detector.js"></script>
 
-    <script src="public/js/app-state.js"></script>
-    <script src="public/js/app-animation.js"></script>
-    <script src="public/js/app-controls.js"></script>
-    <script src="public/js/app-scene.js"></script>
-    <script src="public/js/app.js"></script>
+    <script src="js/app-state.js"></script>
+    <script src="js/app-animation.js"></script>
+    <script src="js/app-controls.js"></script>
+    <script src="js/app-scene.js"></script>
+    <script src="js/app.js"></script>
   </body>
 </html>
